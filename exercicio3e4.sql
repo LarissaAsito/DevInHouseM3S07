@@ -10,6 +10,9 @@ BEGIN
                           ' | CADASTRO: '||I.CADASTRO||
                           ' | QUANTIDADE EM ESTOQUE: '||I.QUANTIDADE_EM_ESTOQUE);
     END LOOP;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('ERRO CUSTOMIZADO: DADOS NÃO ENCONTRADOS');
 END;
 
 EXECUTE ExibirTodosProdutos;
