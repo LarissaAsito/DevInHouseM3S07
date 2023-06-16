@@ -1,9 +1,9 @@
-declare
-    cursor c is 
-        select * from produto where id in (1,2,3);
-begin
-    for i in c loop
-        update produto set status = 0 where id = i.id;
-    end loop;
-    commit;
-end;
+DECLARE
+    CURSOR C IS 
+        SELECT * FROM PRODUTO WHERE ID IN (1,2,3);
+BEGIN
+    FOR I IN C LOOP
+        UPDATE PRODUTO SET STATUS = 0 WHERE ID = I.ID;
+    END LOOP;
+    COMMIT;
+END;
