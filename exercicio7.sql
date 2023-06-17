@@ -1,0 +1,28 @@
+create or replace PROCEDURE ListarProdutoPrecoPorIdProduto 
+(P_ID IN PRODUTO.ID%TYPE, P_MENSAGEM OUT VARCHAR2) AS
+    CURSOR C IS 
+        SELECT PP.VALOR
+          FROM PRODUTO P
+          INNER JOIN PRODUTO_PRECO PP
+          ON P.ID = PP.ID_PRODUTO
+        WHERE P.ID = P_ID;
+    V_SOMA NUMBER := 0;
+BEGIN
+    FOR I IN C LOOP
+        V_SOMA := V_SOMA + I.VALOR;
+    END LOOP;
+    
+    P_MENSAGEM := 'SOMA: '||V_SOMA;
+
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            P_MENSAGEM := 'DADOS NÃO ENCONTRADOS'; 
+END;
+
+SET SERVEROUTPUT ON
+DECLARE
+    V_MENSAGEM VARCHAR2(100);
+BEGIN    
+    ListarProdutoPrecoPorIdProduto(3, V_MENSAGEM);
+    DBMS_OUTPUT.PUT_LINE(V_MENSAGEM);
+END;
